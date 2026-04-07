@@ -5,6 +5,7 @@ import { TestCard } from "@/components/test-card";
 import { CustomTestDialog } from "@/components/custom-test-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { testCategories } from "@/lib/questions";
+import tests from '@/lib/tests';
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,26 @@ export default function TestsPage() {
                       </span>
                     </div>
                   </div>
+
+              {/* Combined / Preset Tests from lib/tests */}
+              <div className="mt-8">
+                <h3 className="text-xl font-semibold text-black dark:text-white mb-4">Other Preset Tests</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {tests.map((t) => (
+                    <div key={t.slug} className="animate-slide-in">
+                      <div className="border border-black/10 dark:border-white/10 rounded-lg p-4 bg-white dark:bg-black">
+                        <h4 className="font-bold mb-1">{t.title}</h4>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{t.description}</p>
+                        <div className="flex gap-2">
+                          <Link href={`/tests/${t.slug}`} className="w-full">
+                            <Button className="w-full bg-black dark:bg-white text-white dark:text-black">Open →</Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
                   <Link href="/tests/maths-100" className="flex-shrink-0">
                     <Button className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 px-8 py-2 font-semibold rounded-lg transition-all transform hover:scale-105 duration-200">
                       Take Test →
